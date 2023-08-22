@@ -3,11 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script defer src="main.js"></script>
-  </head>
+    <title>Weather APP</title>
+  <script defer src="main.js"></script></head>
   <body>
-    <div>test</div>
-    <div>still works</div>
+    <div class="header">
+      <div class="search-box">
+        <input
+          type="text"
+          name="location"
+          id="location"
+          placeholder="Search location..."
+        />
+        <div class="search">
+          <img id="search-btn" src="../images/magnify.svg" alt="search" />
+        </div>
+      </div>
+      <button class="temp-changer">change temp</button>
+    </div>
+    <div class="today-weather">
+      <div class="info"></div>
+      <div class="sideinfo"></div>
+    </div>
   </body>
 </html>
