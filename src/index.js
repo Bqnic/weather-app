@@ -3,6 +3,36 @@ import { showInfo } from "./dom";
 
 const searchBox = document.getElementById("location");
 const search = document.getElementById("search-btn");
+let currentData;
+
+let tempSystem = "°C";
+
+const celsius = document.getElementById("celsius");
+const fahrenheit = document.getElementById("fahrenheit");
+
+celsius.addEventListener("click", () => {
+  if (tempSystem === "°F") {
+    tempSystem = "°C";
+    celsius.classList.add("active");
+    fahrenheit.classList.remove("active");
+
+    if (currentData) {
+      showInfo(currentData, tempSystem);
+    }
+  }
+});
+
+fahrenheit.addEventListener("click", () => {
+  if (tempSystem === "°C") {
+    tempSystem = "°F";
+    fahrenheit.classList.add("active");
+    celsius.classList.remove("active");
+
+    if (currentData) {
+      showInfo(currentData, tempSystem);
+    }
+  }
+});
 
 async function getWeatherInfo(location) {
   const response = await fetch(
@@ -10,8 +40,9 @@ async function getWeatherInfo(location) {
   );
 
   const data = await response.json();
+  currentData = data;
   console.log(data);
-  showInfo(data);
+  showInfo(currentData, tempSystem);
 }
 
 search.addEventListener("click", () => {

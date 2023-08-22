@@ -1,4 +1,4 @@
-function showIcon(link, temp) {
+function showIcon(link, temp, tempSystem) {
   const info = document.querySelector(".info");
 
   const div = document.createElement("div");
@@ -9,7 +9,9 @@ function showIcon(link, temp) {
   img.alt = "icon";
 
   div.appendChild(img);
-  div.appendChild(document.createElement("p")).textContent = `${temp} °C`;
+  div.appendChild(
+    document.createElement("p")
+  ).textContent = `${temp} ${tempSystem}`;
 
   info.appendChild(div);
 }
@@ -27,7 +29,7 @@ function showLocationAndTime(name, country) {
   ).textContent = `Today, ${hours}:${minutes}`;
 }
 
-function showOtherDetails(feelsLike, humidity, wind) {
+function showOtherDetails(feelsLike, humidity, wind, tempSystem) {
   const sideinfo = document.querySelector(".sideinfo");
 
   const imagesDiv = document.createElement("div");
@@ -54,13 +56,17 @@ function showOtherDetails(feelsLike, humidity, wind) {
   textDiv.appendChild(document.createElement("p")).textContent = "Feels like";
   textDiv.appendChild(
     document.createElement("p")
-  ).textContent = `${feelsLike} °C`;
+  ).textContent = `${feelsLike} ${tempSystem}`;
 
   textDiv.appendChild(document.createElement("p")).textContent = "Humidity";
   textDiv.appendChild(document.createElement("p")).textContent = `${humidity}%`;
 
   textDiv.appendChild(document.createElement("p")).textContent = "Wind speed";
-  textDiv.appendChild(document.createElement("p")).textContent = `${wind} km/h`;
+  let speedSystem;
+  if (tempSystem === "°C") speedSystem = " kph";
+  else speedSystem = " mph";
+  textDiv.appendChild(document.createElement("p")).textContent =
+    wind + speedSystem;
 
   sideinfo.appendChild(imagesDiv);
   sideinfo.appendChild(textDiv);
@@ -72,14 +78,19 @@ function cleanInterface() {
   while (sideinfo.firstChild) sideinfo.removeChild(sideinfo.firstChild);
 }
 
-export function showInfo(data) {
+export function showInfo(data, tempSystem) {
   cleanInterface();
   showLocationAndTime(data.location.name, data.location.country);
-  showIcon(data.current.condition.icon, data.current.temp_c);
+  showIcon(
+    data.current.condition.icon,
+    tempSystem === "°C" ? data.current.temp_c : data.current.temp_f,
+    tempSystem
+  );
   showOtherDetails(
-    data.current.feelslike_c,
+    tempSystem === "°C" ? data.current.feelslike_c : data.current.feelslike_f,
     data.current.humidity,
-    data.current.wind_kph
+    tempSystem === "°C" ? data.current.wind_kph : data.current.wind_mph,
+    tempSystem
   );
 }
 

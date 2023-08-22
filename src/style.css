@@ -1,6 +1,7 @@
 :root {
   --bg-color: #3f3f46;
   --font-clr: #f3f4f6;
+  --bg-hover: #18181b;
 }
 
 * {
@@ -88,9 +89,20 @@ img[alt="icon"] {
 
 .temp-changer {
   background-color: var(--bg-color);
-  border: none;
+  border: 2px solid black;
   cursor: pointer;
   color: var(--font-clr);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 10px;
+  transition: 0.4s;
+}
+
+.temp-changer:hover,
+.temp-changer.active {
+  background-color: var(--bg-hover);
+  padding: 12px;
+  transition: 0.4s;
 }
 
 .today-weather {
