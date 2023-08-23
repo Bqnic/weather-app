@@ -44,7 +44,6 @@ body {
 }
 
 .forecast {
-  margin-left: 50px;
   margin-top: 70px;
 }
 
@@ -181,20 +180,40 @@ img[alt="icon"] {
   font-weight: 900;
 }
 
-#forecast-paragraph {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 800;
-  visibility: hidden;
+.forecast-chooser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-#forecast-paragraph.active {
+.forecast-paragraph {
+  font-size: 1.5rem;
+  transition: 0.4s;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.forecast-paragraph.active {
   visibility: visible;
+}
+
+.forecast-paragraph.clicked {
+  font-size: 1.8rem;
+  font-weight: 800;
+  transition: 0.4s;
+}
+
+#day-forecast-paragraph:hover,
+#hour-forecast-paragraph:hover {
+  font-size: 1.7rem;
+  font-weight: 500;
+  transition: 0.4s;
 }
 
 .forecast {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   height: fit-content;
 }
 
@@ -205,33 +224,67 @@ img[alt="icon"] {
   align-items: center;
 }
 
-.forecast div:nth-child(1) {
-  grid-column: 1/6;
+.day-forecast-div:nth-child(1) {
+  grid-column: 2/3;
   grid-row: 1/2;
 }
 
-.forecast div:nth-child(3) {
-  grid-column: 7/12;
+.day-forecast-div:nth-child(3) {
+  grid-column: 4/6;
   grid-row: 1/2;
 }
 
-.forecast div:nth-child(2) {
+.day-forecast-div:nth-child(2) {
   grid-row: 2/3;
-  grid-column: 4/9;
+  grid-column: 3/4;
   margin-top: -50px;
 }
 
-.forecast div p:nth-child(1) {
+.day-forecast-div p:nth-child(1) {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.forecast div p:nth-child(2) {
+.day-forecast-div p:nth-child(2) {
   font-size: 1.4rem;
   font-weight: 800;
 }
 
-.forecast div p:nth-child(3) {
+.day-forecast-div p:nth-child(3) {
   font-size: 0.9rem;
+}
+
+.hour-forecast-div p:nth-child(2) {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.hour-forecast-div:nth-child(1),
+.hour-forecast-div:nth-child(2),
+.hour-forecast-div:nth-child(3),
+.hour-forecast-div:nth-child(4),
+.hour-forecast-div:nth-child(5) {
+  grid-row: 1/2;
+}
+
+.hour-forecast-div:nth-child(6),
+.hour-forecast-div:nth-child(7),
+.hour-forecast-div:nth-child(8),
+.hour-forecast-div:nth-child(9),
+.hour-forecast-div:nth-child(10) {
+  grid-row: 2/3;
+}
+
+.hour-forecast-div:nth-child(11),
+.hour-forecast-div:nth-child(12) {
+  grid-row: 3/4;
+}
+
+.hour-forecast-div:nth-child(11) {
+  grid-column: 2/4;
+}
+
+.hour-forecast-div:nth-child(12) {
+  grid-column: 3/5;
 }

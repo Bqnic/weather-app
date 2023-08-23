@@ -77,19 +77,23 @@ function showOtherDetails(feelsLike, humidity, wind, tempSystem) {
   sideinfo.appendChild(textDiv);
 }
 
-function cleanInterface() {
+function cleanMainInterface() {
   const info = document.querySelector(".info");
   const sideinfo = document.querySelector(".sideinfo");
-  const forecast = document.querySelector(".forecast");
 
   while (info.firstChild) info.removeChild(info.firstChild);
   while (sideinfo.firstChild) sideinfo.removeChild(sideinfo.firstChild);
+}
+
+function cleanForecastInterface() {
+  const forecast = document.querySelector(".forecast");
   while (forecast.firstChild) forecast.removeChild(forecast.firstChild);
 }
 
 function showForecast(icon, maxtemp, mintemp, date, tempSystem) {
   const forecast = document.querySelector(".forecast");
   const container = document.createElement("div");
+  container.classList.add("day-forecast-div");
   const day = getDayString(date);
 
   container.appendChild(document.createElement("p")).textContent = day;
@@ -109,8 +113,100 @@ function showForecast(icon, maxtemp, mintemp, date, tempSystem) {
   forecast.appendChild(container);
 }
 
-export function showInfo(data, tempSystem) {
-  cleanInterface();
+function calculateNext12Hours(
+  hour,
+  forecastToday,
+  forecastTomorrow,
+  tempSystem
+) {
+  const forecast = document.querySelector(".forecast");
+
+  let count = 0;
+  for (let i = hour; i < 24; i += 1) {
+    const container = document.createElement("div");
+    container.classList.add("hour-forecast-div");
+
+    container.appendChild(document.createElement("p")).textContent = `${i}:00`;
+
+    container.appendChild(document.createElement("p")).textContent = `${
+      tempSystem === "°C" ? forecastToday[i].temp_c : forecastToday[i].temp_f
+    } ${tempSystem}`;
+
+    const img = document.createElement("img");
+    img.src = forecastToday[i].condition.icon.replace(
+      "//cdn.weatherapi.com",
+      "../images"
+    );
+    img.alt = "icon";
+    container.appendChild(img);
+    forecast.appendChild(container);
+
+    count += 1;
+  }
+
+  if (count < 12) {
+    for (let i = 0; count < 12; i += 1) {
+      const container = document.createElement("div");
+      container.classList.add("hour-forecast-div");
+
+      container.appendChild(
+        document.createElement("p")
+      ).textContent = `${i}:00`;
+
+      container.appendChild(document.createElement("p")).textContent = `${
+        tempSystem === "°C"
+          ? forecastTomorrow[i].temp_c
+          : forecastTomorrow[i].temp_f
+      } ${tempSystem}`;
+
+      const img = document.createElement("img");
+      img.src = forecastTomorrow[i].condition.icon.replace(
+        "//cdn.weatherapi.com",
+        "../images"
+      );
+      img.alt = "icon";
+      container.appendChild(img);
+      forecast.appendChild(container);
+
+      count += 1;
+    }
+  }
+}
+
+export function showForecastInfo(data, tempSystem, activeForecast) {
+  cleanForecastInterface();
+
+  if (activeForecast === "day") {
+    for (let i = 0; i < 3; i += 1) {
+      showForecast(
+        data.forecast.forecastday[i].day.condition.icon,
+        tempSystem === "°C"
+          ? data.forecast.forecastday[i].day.maxtemp_c
+          : data.forecast.forecastday[i].day.maxtemp_f,
+        tempSystem === "°C"
+          ? data.forecast.forecastday[i].day.mintemp_c
+          : data.forecast.forecastday[i].day.mintemp_f,
+        data.forecast.forecastday[i].date,
+        tempSystem
+      );
+    }
+  } else {
+    calculateNext12Hours(
+      data.location.localtime.split(" ")[1].split(":")[0],
+      data.forecast.forecastday[0].hour,
+      data.forecast.forecastday[1].hour,
+      tempSystem
+    );
+  }
+
+  document
+    .querySelectorAll(".forecast-paragraph")
+    .forEach((p) => p.classList.add("active"));
+}
+
+export function showInfo(data, tempSystem, activeForecast) {
+  cleanMainInterface();
+
   showLocationAndTime(
     data.location.name,
     data.location.country,
@@ -128,22 +224,5 @@ export function showInfo(data, tempSystem) {
     tempSystem === "°C" ? data.current.wind_kph : data.current.wind_mph,
     tempSystem
   );
-
-  for (let i = 0; i < 3; i += 1) {
-    showForecast(
-      data.forecast.forecastday[i].day.condition.icon,
-      tempSystem === "°C"
-        ? data.forecast.forecastday[i].day.maxtemp_c
-        : data.forecast.forecastday[i].day.maxtemp_f,
-      tempSystem === "°C"
-        ? data.forecast.forecastday[i].day.mintemp_c
-        : data.forecast.forecastday[i].day.mintemp_f,
-      data.forecast.forecastday[i].date,
-      tempSystem
-    );
-  }
-
-  document.getElementById("forecast-paragraph").classList.add("active");
+  showForecastInfo(data, tempSystem, activeForecast);
 }
-
-export function placeholder() {}
