@@ -36,12 +36,12 @@ fahrenheit.addEventListener("click", () => {
 
 async function getWeatherInfo(location) {
   const response = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=bc367a20a09f44d8a79125326232108&q=${location}`
+    `https://api.weatherapi.com/v1/forecast.json?key=bc367a20a09f44d8a79125326232108&days=3&q=${location}`
   );
 
   const data = await response.json();
+
   currentData = data;
-  console.log(data);
   showInfo(currentData, tempSystem);
 }
 
@@ -52,12 +52,3 @@ search.addEventListener("click", () => {
 searchBox.addEventListener("keydown", (e) => {
   if (e.key === "Enter") getWeatherInfo(searchBox.value);
 });
-
-// TODO:
-// - upon clicking search send input info to fetch api
-// - show the info
-// - button to change from celsius to fahrenheit
-// - design
-
-// info:
-// - data.current.condition.text - for image

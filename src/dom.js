@@ -1,3 +1,5 @@
+import getDayString from "./getDayString";
+
 function showIcon(link, temp, tempSystem) {
   const info = document.querySelector(".info");
 
@@ -16,17 +18,20 @@ function showIcon(link, temp, tempSystem) {
   info.appendChild(div);
 }
 
-function showLocationAndTime(name, country) {
+function showLocationAndTime(name, country, time, condition) {
   const info = document.querySelector(".info");
-  const today = new Date();
-  const hours = today.getHours();
-  const minutes = today.getMinutes();
+  const locName = document.createElement("p");
+  locName.textContent = name;
+  locName.id = "location-name";
 
-  info.appendChild(document.createElement("p")).textContent = name;
+  const day = getDayString(time.split(" ")[0]);
+
+  info.appendChild(document.createElement("p")).textContent = condition;
+  info.appendChild(locName);
   info.appendChild(document.createElement("p")).textContent = country;
-  info.appendChild(
-    document.createElement("p")
-  ).textContent = `Today, ${hours}:${minutes}`;
+  info.appendChild(document.createElement("p")).textContent = `${day} ${
+    time.split(" ")[1]
+  }`;
 }
 
 function showOtherDetails(feelsLike, humidity, wind, tempSystem) {
@@ -71,16 +76,47 @@ function showOtherDetails(feelsLike, humidity, wind, tempSystem) {
   sideinfo.appendChild(imagesDiv);
   sideinfo.appendChild(textDiv);
 }
+
 function cleanInterface() {
   const info = document.querySelector(".info");
   const sideinfo = document.querySelector(".sideinfo");
+  const forecast = document.querySelector(".forecast");
+
   while (info.firstChild) info.removeChild(info.firstChild);
   while (sideinfo.firstChild) sideinfo.removeChild(sideinfo.firstChild);
+  while (forecast.firstChild) forecast.removeChild(forecast.firstChild);
+}
+
+function showForecast(icon, maxtemp, mintemp, date, tempSystem) {
+  const forecast = document.querySelector(".forecast");
+  const container = document.createElement("div");
+  const day = getDayString(date);
+
+  container.appendChild(document.createElement("p")).textContent = day;
+
+  container.appendChild(
+    document.createElement("p")
+  ).textContent = `${maxtemp} ${tempSystem}`;
+  container.appendChild(
+    document.createElement("p")
+  ).textContent = `${mintemp} ${tempSystem}`;
+
+  const img = document.createElement("img");
+  img.src = icon.replace("//cdn.weatherapi.com", "../images");
+  img.alt = "icon";
+  container.appendChild(img);
+
+  forecast.appendChild(container);
 }
 
 export function showInfo(data, tempSystem) {
   cleanInterface();
-  showLocationAndTime(data.location.name, data.location.country);
+  showLocationAndTime(
+    data.location.name,
+    data.location.country,
+    data.location.localtime,
+    data.current.condition.text
+  );
   showIcon(
     data.current.condition.icon,
     tempSystem === "°C" ? data.current.temp_c : data.current.temp_f,
@@ -92,6 +128,22 @@ export function showInfo(data, tempSystem) {
     tempSystem === "°C" ? data.current.wind_kph : data.current.wind_mph,
     tempSystem
   );
+
+  for (let i = 0; i < 3; i += 1) {
+    showForecast(
+      data.forecast.forecastday[i].day.condition.icon,
+      tempSystem === "°C"
+        ? data.forecast.forecastday[i].day.maxtemp_c
+        : data.forecast.forecastday[i].day.maxtemp_f,
+      tempSystem === "°C"
+        ? data.forecast.forecastday[i].day.mintemp_c
+        : data.forecast.forecastday[i].day.mintemp_f,
+      data.forecast.forecastday[i].date,
+      tempSystem
+    );
+  }
+
+  document.getElementById("forecast-paragraph").classList.add("active");
 }
 
 export function placeholder() {}
