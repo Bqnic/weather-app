@@ -204,6 +204,12 @@ img[alt="icon"] {
   transition: 0.4s;
 }
 
+#day-forecast-paragraph.clicked:hover,
+#hour-forecast-paragraph.clicked:hover {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
 #day-forecast-paragraph:hover,
 #hour-forecast-paragraph:hover {
   font-size: 1.7rem;

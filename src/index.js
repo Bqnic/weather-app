@@ -4,10 +4,10 @@ import { showForecastInfo, showInfo } from "./dom";
 const searchBox = document.getElementById("location");
 const search = document.getElementById("search-btn");
 let currentData;
-
-// system for converting between celsius and fahrenheit
+let activeForecast = "day";
 let tempSystem = "°C";
 
+// system for converting between celsius and fahrenheit
 const celsius = document.getElementById("celsius");
 const fahrenheit = document.getElementById("fahrenheit");
 
@@ -20,7 +20,7 @@ celsius.addEventListener("click", () => {
     fahrenheit.classList.remove("active");
 
     if (currentData) {
-      showInfo(currentData, tempSystem);
+      showInfo(currentData, tempSystem, activeForecast);
     }
   }
 });
@@ -32,14 +32,12 @@ fahrenheit.addEventListener("click", () => {
     celsius.classList.remove("active");
 
     if (currentData) {
-      showInfo(currentData, tempSystem);
+      showInfo(currentData, tempSystem, activeForecast);
     }
   }
 });
 
 // system for switching between day and hour forecast
-let activeForecast = "day";
-
 const dayForecast = document.getElementById("day-forecast-paragraph");
 const hourForecast = document.getElementById("hour-forecast-paragraph");
 
@@ -79,3 +77,9 @@ search.addEventListener("click", () => {
 searchBox.addEventListener("keydown", (e) => {
   if (e.key === "Enter") getWeatherInfo(searchBox.value);
 });
+
+// TODO:
+// error handling
+// change background if it's day or night
+// design for bigger sizes
+// add footer
