@@ -289,7 +289,56 @@ img[alt="icon"] {
   font-weight: 500;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 300px) {
+  .hour-forecast-div:nth-child(1),
+  .hour-forecast-div:nth-child(2),
+  .hour-forecast-div:nth-child(3),
+  .hour-forecast-div:nth-child(4) {
+    grid-row: 1/2;
+  }
+
+  .hour-forecast-div:nth-child(5),
+  .hour-forecast-div:nth-child(6),
+  .hour-forecast-div:nth-child(7),
+  .hour-forecast-div:nth-child(8) {
+    grid-row: 2/3;
+  }
+
+  .hour-forecast-div:nth-child(9),
+  .hour-forecast-div:nth-child(10),
+  .hour-forecast-div:nth-child(11),
+  .hour-forecast-div:nth-child(12) {
+    grid-row: 3/4;
+  }
+
+  .forecast-paragraph {
+    font-size: 1.2rem;
+  }
+
+  .forecast-paragraph.clicked {
+    font-size: 1.4rem;
+  }
+
+  #day-forecast-paragraph.clicked:hover,
+  #hour-forecast-paragraph.clicked:hover {
+    font-size: 1.4rem;
+  }
+
+  .temp-changer {
+    font-size: 0.6rem;
+    padding: 5px;
+  }
+
+  .temp-changer.active {
+    padding: 7px;
+  }
+
+  .temp-changer:hover {
+    padding: 7px;
+  }
+}
+
+@media screen and (min-width: 400px) {
   .hour-forecast-div:nth-child(1),
   .hour-forecast-div:nth-child(2),
   .hour-forecast-div:nth-child(3),
@@ -317,6 +366,42 @@ img[alt="icon"] {
 
   .hour-forecast-div:nth-child(12) {
     grid-column: 3/5;
+  }
+
+  .temp-changer {
+    font-size: 1.2rem;
+    padding: 10px;
+  }
+
+  .temp-changer.active {
+    padding: 12px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .hour-forecast-div:nth-child(1),
+  .hour-forecast-div:nth-child(2),
+  .hour-forecast-div:nth-child(3),
+  .hour-forecast-div:nth-child(4),
+  .hour-forecast-div:nth-child(5),
+  .hour-forecast-div:nth-child(6) {
+    grid-row: 1/2;
+  }
+
+  .hour-forecast-div:nth-child(7),
+  .hour-forecast-div:nth-child(8),
+  .hour-forecast-div:nth-child(9),
+  .hour-forecast-div:nth-child(10),
+  .hour-forecast-div:nth-child(11),
+  .hour-forecast-div:nth-child(12) {
+    grid-row: 2/3;
+  }
+  .hour-forecast-div:nth-child(11) {
+    grid-column: 5;
+  }
+
+  .hour-forecast-div:nth-child(12) {
+    grid-column: 6;
   }
 }
 
