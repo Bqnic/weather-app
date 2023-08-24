@@ -6,7 +6,7 @@ function showIcon(link, temp, tempSystem) {
   const div = document.createElement("div");
   div.classList.add("icon-and-temp");
   const img = document.createElement("img");
-  const icon = link.replace("//cdn.weatherapi.com", "../images");
+  const icon = link.replace("//cdn.weatherapi.com", "images");
   img.src = icon;
   img.alt = "icon";
 
@@ -40,17 +40,17 @@ function showOtherDetails(feelsLike, humidity, wind, tempSystem) {
   const imagesDiv = document.createElement("div");
   const feelsLikeImg = document.createElement("img");
   feelsLikeImg.classList.add("icon");
-  feelsLikeImg.src = "../images/thermometer.svg";
+  feelsLikeImg.src = "images/thermometer.svg";
   feelsLikeImg.alt = "thermometer";
 
   const humidityImg = document.createElement("img");
   humidityImg.classList.add("icon");
-  humidityImg.src = "../images/water-outline.svg";
+  humidityImg.src = "images/water-outline.svg";
   humidityImg.alt = "humidity-icon";
 
   const windImg = document.createElement("img");
   windImg.classList.add("icon");
-  windImg.src = "../images/weather-windy.svg";
+  windImg.src = "images/weather-windy.svg";
   windImg.alt = "windy";
 
   imagesDiv.appendChild(feelsLikeImg);
@@ -106,7 +106,7 @@ function showForecast(icon, maxtemp, mintemp, date, tempSystem) {
   ).textContent = `${mintemp} ${tempSystem}`;
 
   const img = document.createElement("img");
-  img.src = icon.replace("//cdn.weatherapi.com", "../images");
+  img.src = icon.replace("//cdn.weatherapi.com", "images");
   img.alt = "icon";
   container.appendChild(img);
 
@@ -135,7 +135,7 @@ function calculateNext12Hours(
     const img = document.createElement("img");
     img.src = forecastToday[i].condition.icon.replace(
       "//cdn.weatherapi.com",
-      "../images"
+      "images"
     );
     img.alt = "icon";
     container.appendChild(img);
@@ -160,7 +160,7 @@ function calculateNext12Hours(
       const img = document.createElement("img");
       img.src = forecastTomorrow[i].condition.icon.replace(
         "//cdn.weatherapi.com",
-        "../images"
+        "images"
       );
       img.alt = "icon";
       container.appendChild(img);

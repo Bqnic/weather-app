@@ -98,7 +98,3 @@ searchBox.addEventListener("keydown", (e) => {
 searchBox.addEventListener("input", () => {
   searchBox.setCustomValidity("");
 });
-
-// TODO:
-// design for bigger sizes
-// add footer

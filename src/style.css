@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #0c4a6e;
+  --bg-color: #075985;
   --font-clr: #f3f4f6;
   --bg-hover: #082f49;
 }
@@ -29,13 +29,13 @@ html {
 
 body {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background-color: var(--bg-color);
-  overflow-x: hidden;
   color: var(--font-clr);
   display: flex;
   flex-direction: column;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .footer {
@@ -243,6 +243,7 @@ img[alt="icon"] {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   height: fit-content;
+  row-gap: 20px;
 }
 
 .forecast div {
@@ -253,19 +254,19 @@ img[alt="icon"] {
 }
 
 .day-forecast-div:nth-child(1) {
-  grid-column: 2/3;
-  grid-row: 1/2;
-}
-
-.day-forecast-div:nth-child(3) {
-  grid-column: 4/6;
+  grid-column: 1/2;
   grid-row: 1/2;
 }
 
 .day-forecast-div:nth-child(2) {
   grid-row: 2/3;
-  grid-column: 3/4;
+  grid-column: 3/5;
   margin-top: -50px;
+}
+
+.day-forecast-div:nth-child(3) {
+  grid-column: 6;
+  grid-row: 1/2;
 }
 
 .day-forecast-div p:nth-child(1) {
@@ -288,31 +289,235 @@ img[alt="icon"] {
   font-weight: 500;
 }
 
-.hour-forecast-div:nth-child(1),
-.hour-forecast-div:nth-child(2),
-.hour-forecast-div:nth-child(3),
-.hour-forecast-div:nth-child(4),
-.hour-forecast-div:nth-child(5) {
-  grid-row: 1/2;
+@media screen and (max-width: 480px) {
+  .hour-forecast-div:nth-child(1),
+  .hour-forecast-div:nth-child(2),
+  .hour-forecast-div:nth-child(3),
+  .hour-forecast-div:nth-child(4),
+  .hour-forecast-div:nth-child(5) {
+    grid-row: 1/2;
+  }
+
+  .hour-forecast-div:nth-child(6),
+  .hour-forecast-div:nth-child(7),
+  .hour-forecast-div:nth-child(8),
+  .hour-forecast-div:nth-child(9),
+  .hour-forecast-div:nth-child(10) {
+    grid-row: 2/3;
+  }
+
+  .hour-forecast-div:nth-child(11),
+  .hour-forecast-div:nth-child(12) {
+    grid-row: 3/4;
+  }
+
+  .hour-forecast-div:nth-child(11) {
+    grid-column: 2/4;
+  }
+
+  .hour-forecast-div:nth-child(12) {
+    grid-column: 3/5;
+  }
 }
 
-.hour-forecast-div:nth-child(6),
-.hour-forecast-div:nth-child(7),
-.hour-forecast-div:nth-child(8),
-.hour-forecast-div:nth-child(9),
-.hour-forecast-div:nth-child(10) {
-  grid-row: 2/3;
+@media screen and (min-width: 620px) {
+  .today-weather {
+    font-size: 1.3rem;
+  }
+  .info p:first-child {
+    font-size: 1.7rem;
+  }
+  #location-name {
+    font-size: 1.5rem;
+  }
+  .icon-and-temp p {
+    font-size: 2.1rem;
+  }
+  .icon {
+    height: 65px;
+    width: 65px;
+  }
+
+  .sideinfo div p:nth-child(2n) {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  .sideinfo div p:nth-child(2n + 1) {
+    font-size: 0.8rem;
+  }
+
+  .sideinfo div p:nth-child(3),
+  .sideinfo div p:nth-child(5) {
+    margin-top: 30px;
+  }
+
+  .day-forecast-div p:nth-child(1) {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .day-forecast-div p:nth-child(2) {
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  .day-forecast-div p:nth-child(3) {
+    font-size: 1rem;
+  }
+
+  .hour-forecast-div p:nth-child(2) {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
+  .hour-forecast-div p:nth-child(1) {
+    font-size: 1.1rem;
+  }
 }
 
-.hour-forecast-div:nth-child(11),
-.hour-forecast-div:nth-child(12) {
-  grid-row: 3/4;
+@media screen and (min-width: 960px) {
+  .today-weather {
+    font-size: 1.4rem;
+  }
+  .info p:first-child {
+    font-size: 1.8rem;
+  }
+  #location-name {
+    font-size: 1.6rem;
+  }
+  .icon-and-temp p {
+    font-size: 2.2rem;
+  }
+  .icon {
+    height: 80px;
+    width: 80px;
+  }
+
+  .sideinfo div p:nth-child(2n) {
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+
+  .sideinfo div p:nth-child(2n + 1) {
+    font-size: 0.9rem;
+  }
+
+  .sideinfo div p:nth-child(3),
+  .sideinfo div p:nth-child(5) {
+    margin-top: 45px;
+  }
+
+  .day-forecast-div p:nth-child(1) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .day-forecast-div p:nth-child(2) {
+    font-size: 1.6rem;
+    font-weight: 800;
+  }
+
+  .day-forecast-div p:nth-child(3) {
+    font-size: 1.1rem;
+  }
+
+  .hour-forecast-div p:nth-child(2) {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .hour-forecast-div p:nth-child(2) {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .hour-forecast-div p:nth-child(1) {
+    font-size: 1.2rem;
+  }
+
+  img[alt="icon"] {
+    height: 90px;
+    width: 90px;
+  }
 }
 
-.hour-forecast-div:nth-child(11) {
-  grid-column: 2/4;
+@media screen and (min-width: 1200px) {
+  .today-weather {
+    font-size: 1.5rem;
+  }
+  .info p:first-child {
+    font-size: 1.9rem;
+  }
+  #location-name {
+    font-size: 1.7rem;
+  }
+  .icon-and-temp p {
+    font-size: 2.3rem;
+  }
+  .icon {
+    height: 90px;
+    width: 90px;
+  }
+
+  .sideinfo div p:nth-child(2n) {
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+  .sideinfo div p:nth-child(2n + 1) {
+    font-size: 1rem;
+  }
+
+  .sideinfo div p:nth-child(3),
+  .sideinfo div p:nth-child(5) {
+    margin-top: 60px;
+  }
+
+  .day-forecast-div p:nth-child(1) {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .day-forecast-div p:nth-child(2) {
+    font-size: 1.7rem;
+    font-weight: 800;
+  }
+
+  .day-forecast-div p:nth-child(3) {
+    font-size: 1.2rem;
+  }
+
+  .hour-forecast-div p:nth-child(2) {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .hour-forecast-div p:nth-child(2) {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .hour-forecast-div p:nth-child(1) {
+    font-size: 1.3rem;
+  }
+
+  img[alt="icon"] {
+    height: 90px;
+    width: 90px;
+  }
 }
 
-.hour-forecast-div:nth-child(12) {
-  grid-column: 3/5;
+@media screen and (min-width: 1500px) {
+  .header {
+    margin: 30px 325px;
+  }
+
+  .today-weather,
+  .forecast {
+    margin: 60px 325px;
+  }
 }
