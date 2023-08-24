@@ -122,7 +122,7 @@ function calculateNext12Hours(
   const forecast = document.querySelector(".forecast");
 
   let count = 0;
-  for (let i = hour; i < 24; i += 1) {
+  for (let i = Number(hour); i < 24 && count < 12; i += 1, count += 1) {
     const container = document.createElement("div");
     container.classList.add("hour-forecast-div");
 
@@ -140,12 +140,10 @@ function calculateNext12Hours(
     img.alt = "icon";
     container.appendChild(img);
     forecast.appendChild(container);
-
-    count += 1;
   }
 
   if (count < 12) {
-    for (let i = 0; count < 12; i += 1) {
+    for (let i = 0; count < 12; i += 1, count += 1) {
       const container = document.createElement("div");
       container.classList.add("hour-forecast-div");
 
@@ -167,8 +165,6 @@ function calculateNext12Hours(
       img.alt = "icon";
       container.appendChild(img);
       forecast.appendChild(container);
-
-      count += 1;
     }
   }
 }
