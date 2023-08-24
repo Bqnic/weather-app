@@ -65,21 +65,40 @@ async function getWeatherInfo(location) {
 
   const data = await response.json();
 
+  if (data.error) {
+    searchBox.setCustomValidity("You entered invalid location's name.");
+    searchBox.reportValidity();
+  } else {
+    currentData = data;
+    showInfo(currentData, tempSystem, activeForecast);
+  }
+}
+
+async function showInitalLocation() {
+  const response = await fetch(
+    `https://api.weatherapi.com/v1/forecast.json?key=bc367a20a09f44d8a79125326232108&days=3&q=zagreb`
+  );
+
+  const data = await response.json();
+
   currentData = data;
-  console.log(data);
   showInfo(currentData, tempSystem, activeForecast);
 }
 
+showInitalLocation();
+
 search.addEventListener("click", () => {
-  if (searchBox.value.trimStart() !== "") getWeatherInfo(searchBox.value);
+  getWeatherInfo(searchBox.value);
 });
 
 searchBox.addEventListener("keydown", (e) => {
   if (e.key === "Enter") getWeatherInfo(searchBox.value);
 });
 
+searchBox.addEventListener("input", () => {
+  searchBox.setCustomValidity("");
+});
+
 // TODO:
-// error handling
-// change background if it's day or night
 // design for bigger sizes
 // add footer

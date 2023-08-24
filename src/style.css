@@ -1,7 +1,7 @@
 :root {
-  --bg-color: #3f3f46;
+  --bg-color: #0c4a6e;
   --font-clr: #f3f4f6;
-  --bg-hover: #18181b;
+  --bg-hover: #082f49;
 }
 
 * {
@@ -24,6 +24,7 @@ html {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+  overflow: auto;
 }
 
 body {
@@ -32,6 +33,27 @@ body {
   background-color: var(--bg-color);
   overflow-x: hidden;
   color: var(--font-clr);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--font-clr);
+  transition: 0.4s;
+}
+
+a:hover {
+  font-size: 1.1rem;
+  transition: 0.4s;
 }
 
 .header {
