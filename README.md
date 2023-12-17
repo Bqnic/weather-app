@@ -10,5 +10,3 @@ Options for weather include a 3 day forecast and next 12 hours forecast.
 
 Live version: [Weather APP](https://bqnic.github.io/weather-app/)
 
-
-![](screenshot.png)
